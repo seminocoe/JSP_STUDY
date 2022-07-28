@@ -1,0 +1,60 @@
+package com.bbs;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.*;
+import java.util.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/VisitList")
+public class VisitList extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setContentType("text/html;charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		try {
+			out.println("<html>");
+			out.println("<head><title>방명록 리스트</title><head>");
+			
+			out.println("<body>");
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("select no, writer, memo, regdate ");
+			sql.append("from visit ");
+			sql.append("order by no desc");
+			
+			
+			
+			/*
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		*/
+			out.println("</body>");
+			out.print("</html>");
+		}finally {
+			out.close();
+		}
+	}
+}

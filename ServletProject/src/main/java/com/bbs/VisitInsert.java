@@ -3,13 +3,13 @@ package com.bbs;
 import java.sql.*;
 import java.io.IOException;
 import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-//@WebServlet("/VisitInsert")
+@WebServlet("/VisitInsert")
 public class VisitInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class VisitInsert extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
-	
+		
 	
 	//이렇게 따로 만들면 어디서든 호출하게 가능 (위에 처럼) 작성은 여기다만 하면 됌
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

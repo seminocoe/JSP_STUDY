@@ -17,7 +17,8 @@ version="3.1">
 </servlet-mapping>
 -->  
 
- <servlet>
+<!-- 
+ <servlet> 
 		<servlet-name>VisitInsert</servlet-name>
 		<servlet-class>com.bbs.VisitInsert</servlet-class>
 </servlet>
@@ -26,4 +27,53 @@ version="3.1">
 		<servlet-name>VisitInsert</servlet-name>
 		<url-pattern>/VisitInsert</url-pattern>
 </servlet-mapping>
+
+
+
+ <servlet> 
+		<servlet-name>VisitList</servlet-name>
+		<servlet-class>com.bbs.VisitList</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+		<servlet-name>VisitList</servlet-name>
+		<url-pattern>/VisitList</url-pattern>
+		위에 url-pattern이 visitinsert에 있는 
+		response.sendRedirect("이부분") 과 같아야 함
+</servlet-mapping>
+		 
+ -->
+
+
+
+<context-param>
+<param-name>company</param-name>
+<param-value>GlobalIn</param-value>
+</context-param>
+
+<context-param>
+<param-name>manager</param-name>
+<param-value>jeongS Kim</param-value>
+</context-param>
+
+<servlet>
+	<servlet-name>InitParam</servlet-name>
+	<servlet-class>com.sample.InitParam</servlet-class>
+	<init-param>
+	<param-name>tel</param-name>
+	<param-value>010-1234-1234</param-value>
+	</init-param>
+	<init-param>
+	<param-name>email</param-name>
+	<param-value>Kim@globalin.co.kr</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>InitParam</servlet-name>
+	<url-pattern>/InitParam</url-pattern>
+</servlet-mapping>
+
+
+
 </web-app>
