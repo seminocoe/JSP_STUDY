@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<h1>getParameterNames() 메소드</h1>
+	<form action="" method="post">
+		<fieldset>
+			<legend>회원관리</legend>
+				<ul>
+					<li>
+						<label>이름</label>
+					</li>
+						
+				</ul>
+		</fieldset>
+	</form>
+</body>
+</html>
