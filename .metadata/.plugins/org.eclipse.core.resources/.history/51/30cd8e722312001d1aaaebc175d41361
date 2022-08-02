@@ -1,0 +1,23 @@
+<%@page import="com.sample.SimpleData"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%
+    	request.setCharacterEncoding("utf-8");
+    %>
+    
+    <jsp:useBean id="msg" class="com.sample.SimpleData"/>
+    
+    <%-- <%
+    	SimpleData msg = new SimpleData();//기존 자바에선 이렇게 쓰던게 빈즈로는 위에처럼 사용함
+    %> --%>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+</body>
+</html>

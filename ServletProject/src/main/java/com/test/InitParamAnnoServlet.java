@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name= "InitParamAnnoServlet",
+/*@WebServlet(name= "InitParamAnnoServlet",
 					  urlPatterns = {"/InitParam"},
 					  initParams = {@WebInitParam(name="tel", value="010-1234-1234"),
 							  				@WebInitParam(name="email", value="hong@naver.com")})
-		
+*/		
 public class InitParamAnnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

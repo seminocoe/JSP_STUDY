@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%
+    // pageContext Scope에 속성 값 저장하기 (해당 JSP 페이지 내에서만 유효함)
+    pageContext.setAttribute("pageAttribute", "홍길동")
+    
+    %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+</body>
+</html>

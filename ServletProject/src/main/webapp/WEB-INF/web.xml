@@ -46,7 +46,7 @@ version="3.1">
  -->
 
 
-<!-- 
+ 
 <context-param>
 <param-name>company</param-name>
 <param-value>GlobalIn</param-value>
@@ -56,7 +56,7 @@ version="3.1">
 <param-name>manager</param-name>
 <param-value>jeongS Kim</param-value>
 </context-param>
-
+<!-- 
 <servlet>
 	<servlet-name>InitParam</servlet-name>
 	<servlet-class>com.sample.InitParam</servlet-class>
@@ -76,11 +76,11 @@ version="3.1">
  -->
 
 <!-- Listner 설정 -->
+
 <listener>
 	<listener-class>com.test.ContextListenerImpl</listener-class>
 </listener>
-
-
+ 
 
 
 
@@ -98,7 +98,20 @@ version="3.1">
 </filter-mapping>
  -->
 
+<!-- 에러 페이지 등록 -->
 
+<error-page>
+	<error-code>404</error-code>
+	<location>/error/error404.jsp</location>
+</error-page>
+<!-- <error-page>
+	<error-code>500</error-code>
+	<location>/error/error500.jsp</location>
+</error-page> -->
 
+<error-page>
+	<exception-type>java.lang.NullPointerException</exception-type>
+	<location>/error/errorNullPointer.jsp</location>
+</error-page>
 
 </web-app>
