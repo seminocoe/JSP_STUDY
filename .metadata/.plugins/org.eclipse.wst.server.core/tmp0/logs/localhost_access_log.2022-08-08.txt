@@ -141,3 +141,7 @@
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:14:09:38 +0900] "POST /ServletProject/template/joinChk.jsp HTTP/1.1" 200 353
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:14:13:03 +0900] "POST /ServletProject/template/joinChk.jsp HTTP/1.1" 200 746
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:14:21:07 +0900] "GET /ServletProject/template/join.jsp HTTP/1.1" 200 1473
+127.0.0.1 - - [08/Aug/2022:21:18:47 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:18:47 +0900] "GET /ServletProject/template/template.jsp HTTP/1.1" 200 957
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:18:47 +0900] "GET /ServletProject/template/zzz.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:18:58 +0900] "GET /ServletProject/template/join.jsp HTTP/1.1" 200 1473
