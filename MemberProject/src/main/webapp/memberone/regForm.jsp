@@ -92,6 +92,7 @@
 	<tr>
 		<td colspan="2" align="center">
 			<input type="button" value="회원가입" onclick="#">&nbsp;&nbsp;
+			<!-- <input type="submit" value="회원가입">테스트 할려고 해본 것 페이지는 잘 넘어감-->
 			<input type="reset" value="다시입력">
 		</td>
 	</tr>
