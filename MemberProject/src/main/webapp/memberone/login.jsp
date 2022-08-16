@@ -15,7 +15,7 @@
 <body>
 
 <%
-	if(loginID != null){//로그인 되었을 때 화면 출력 
+	if(loginID != null){//로그인 되었을 때 화면 출력
 %>
 
 <table width="300" border="1">
