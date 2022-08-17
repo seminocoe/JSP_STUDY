@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class BoardVO {
 
-	private int number;
+	private int num;
 	private String writer;
 	private String email;
 	private String subject;
@@ -17,11 +17,11 @@ public class BoardVO {
 	private String content;
 	private String ip;
 	
-	public int getNumber() {
-		return number;
+	public int getNum() {
+		return num;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNum(int number) {
+		this.num = number;
 	}
 	public String getWriter() {
 		return writer;

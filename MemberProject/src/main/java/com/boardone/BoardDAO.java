@@ -29,7 +29,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		int num = article.getNumber();
+		int num = article.getNum();
 		int ref = article.getRef();
 		int step = article.getStep();
 		int depth = article.getDepth();
@@ -153,7 +153,7 @@ public class BoardDAO {
 				
 				do {
 					BoardVO article = new BoardVO();
-					article.setNumber(rs.getInt("num"));
+					article.setNum(rs.getInt("num"));
 					article.setWriter(rs.getString("writer"));
 					article.setEmail(rs.getString("email"));
 					article.setSubject(rs.getString("subject"));
@@ -163,6 +163,7 @@ public class BoardDAO {
 					article.setRef(rs.getInt("ref"));
 					article.setStep(rs.getInt("step"));
 					article.setDepth(rs.getInt("depth"));
+					article.setContent(rs.getString("content"));
 					article.setIp(rs.getString("ip"));
 					articleList.add(article);
 				}while(rs.next());
@@ -180,4 +181,164 @@ public class BoardDAO {
 		
 		return articleList;
 	}//end getArticles
+	
+	/*
+	 * list.jsp 페이지에서 글 제목을 누르면 글 내용을 볼 수 있도록 구현함
+	 * 
+	 * 글을 num을 매개변수로 해서 하나의 글을 가져와서 보여줌
+	 * 상세정보를 데이터베이스에서 가져옴
+	 * 
+	 * 글 하나의 정보를 가져오는 메소드를 구현해야함
+	 */
+	
+	public BoardVO getArticle(int num){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardVO article = null;
+		
+		try {
+			
+			conn = ConnUtil.getConnection();
+			pstmt = conn.prepareStatement(
+					"update board set readcount=readcount+1 where num=?");
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement(
+					"select * from board where num=?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				article = new BoardVO();
+				
+				article.setNum(rs.getInt("num"));
+				article.setWriter(rs.getString("writer"));
+				article.setEmail(rs.getString("email"));
+				article.setSubject(rs.getString("subject"));
+				article.setPass(rs.getString("pass"));
+				article.setRegdate(rs.getTimestamp("regdate"));
+				article.setReadcount(rs.getInt("readcount"));
+				article.setRef(rs.getInt("ref"));
+				article.setStep(rs.getInt("step"));
+				article.setDepth(rs.getInt("depth"));
+				article.setContent(rs.getString("content"));
+				article.setIp(rs.getString("ip"));
+			}
+			
+		}catch (SQLException s1) {
+			s1.printStackTrace();
+
+		} finally {
+			if (rs != null)try {rs.close();} catch (SQLException sq1) {}
+			if (conn != null)try {conn.close();} catch (SQLException sq2) {}
+			if (pstmt != null)try {pstmt.close();} catch (SQLException sq3) {}
+		}
+		return article;
+	}//end getArticle
+	
+	/*
+	 * 글 수정 버튼을 누를 경우 updateForm.jsp페이지로 이동하도록 링크를 걸었당
+	 * 
+	 * 글 수정시 글 목록보기와 다르게 조회수를 증가 시킬필요는 없당
+	 * 
+	 * 조회수 증가를 제외하고 num에 해당하는 글만 가져오는 메소드를 구현한당
+	 */
+	
+	public BoardVO updateGetArticle(int num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardVO article = null;
+		
+		try {
+			
+			conn = ConnUtil.getConnection();
+			
+			pstmt = conn.prepareStatement(
+					"select * from board where num=?");
+			
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				article = new BoardVO();
+				
+				article.setNum(rs.getInt("num"));
+				article.setWriter(rs.getString("writer"));
+				article.setEmail(rs.getString("email"));
+				article.setSubject(rs.getString("subject"));
+				article.setPass(rs.getString("pass"));
+				article.setRegdate(rs.getTimestamp("regdate"));
+				article.setReadcount(rs.getInt("readcount"));
+				article.setRef(rs.getInt("ref"));
+				article.setStep(rs.getInt("step"));
+				article.setDepth(rs.getInt("depth"));
+				article.setContent(rs.getString("content"));
+				article.setIp(rs.getString("ip"));
+			}
+			
+		}catch (SQLException s1) {
+			s1.printStackTrace();
+
+		} finally {
+			if (rs != null)try {rs.close();} catch (SQLException sq1) {}
+			if (conn != null)try {conn.close();} catch (SQLException sq2) {}
+			if (pstmt != null)try {pstmt.close();} catch (SQLException sq3) {}
+		}
+		return article;
+	}//end updateGetArticle
+	
+	public int updateArticle(BoardVO article) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String dbpasswd= "";
+		String strQuery = "";
+		int result = -1;
+		
+		try {
+			
+			conn = ConnUtil.getConnection();
+			
+			pstmt = conn.prepareStatement("select pass from board where num=?");
+			pstmt.setInt(1, article.getNum());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dbpasswd = rs.getString("pass");
+				
+				if(dbpasswd.equals(article.getPass())) {
+					
+					strQuery = "update board set writer=?, email=?,subject=?,content=? where num=?";
+					pstmt = conn.prepareStatement(strQuery);
+					pstmt.setString(1, article.getWriter());
+					pstmt.setString(2, article.getEmail());
+					pstmt.setString(3, article.getSubject());
+					pstmt.setString(4, article.getContent());
+					pstmt.setInt(5, article.getNum());
+					
+					pstmt.executeUpdate();
+					result = 1;//수정성공
+				}else{
+					result = 0;//수정실패
+				}
+			}
+			
+		}catch (SQLException s1) {
+			s1.printStackTrace();
+
+		} finally {
+			if (rs != null)try {rs.close();} catch (SQLException sq1) {}
+			if (conn != null)try {conn.close();} catch (SQLException sq2) {}
+			if (pstmt != null)try {pstmt.close();} catch (SQLException sq3) {}
+		}
+		return result;
+		
+	}//endu pdateArticle
 }

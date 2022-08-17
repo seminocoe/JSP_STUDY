@@ -94,8 +94,8 @@ try{
 		</tr>
 		</table>
 	</form>
-	<%}catch(Exception e){} %>
 </div>
+	<%}catch(Exception e){} %>
 
 </body>
 </html>
