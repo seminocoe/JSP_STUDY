@@ -349,14 +349,13 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 	    ArrayList<BoardVO> list = new ArrayList<BoardVO>();
-	    String SQL ="select * from BoardVO where "+searchField.trim();
+	    String SQL ="select * from board where "+searchField.trim();
 	      
 	    try {
-			/*
-			 * if(searchText != null && !searchText.equals("") ){//이거 빼면 안 나온다ㅜ 왜지? SQL
-			 * +=" LIKE '%"+searchText.trim()+"%' order by BoardVOID desc limit 10"; }
-			 */	        
-	    	SQL +=" LIKE '%"+searchText.trim()+"%' order by num desc limit 10";
+	    	
+	    	conn = ConnUtil.getConnection();
+			 	        
+			 SQL +=" LIKE '%"+searchText.trim()+"%' order by num desc"; 
 	            
 	        pstmt=conn.prepareStatement(SQL);
 	        rs=pstmt.executeQuery();//select
@@ -365,9 +364,9 @@ public class BoardDAO {
 				BoardVO article = new BoardVO();
 				article.setNum(rs.getInt("num"));
 				article.setWriter(rs.getString("writer"));
-				article.setEmail(rs.getString("email"));
+				/* article.setEmail(rs.getString("email")); */
 				article.setSubject(rs.getString("subject"));
-				article.setPass(rs.getString("pass"));
+				/* article.setPass(rs.getString("pass")); */
 				article.setRegdate(rs.getTimestamp("regdate"));
 				article.setReadcount(rs.getInt("readcount"));
 				article.setRef(rs.getInt("ref"));

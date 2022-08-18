@@ -33,6 +33,8 @@ number = count;
 <meta charset="UTF-8">
 <title>게시판</title>
 <link rel="stylesheet" type="text/css" href="style.css?after">
+<script type="text/javascript" src="script.js"></script>
+
 </head>
 <body bgcolor="<%=bodyback_c%>">
 
@@ -116,26 +118,23 @@ number = count;
 
 <!-- 검색기능 창ex -->
 <div align="center">
-			<form method="post" name="search" action="searchbbs.jsp">
-				<table class="pull-right">
-					<tr>
-						<td><select class="form-control" name="searchField">
-								<option value="0">선택</option>
-								<option value="all">전체</option>
-								<option value="bbsTitle">제목</option>
-								<option value="userID">작성자</option>
-								<option value="content">내용</option>
-						</select></td>
-						<td><input type="text" class="form-control"
-							placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-						<td><button type="submit" class="btn btn-success">검색</button></td>
-					</tr>
-
-				</table>
-			</form>
+         <form method="post" name="search" action="searchbbs.jsp" onsubmit="return listSave()">
+            <table>
+               <tr>
+                  <td><select name="searchField">
+                        <!-- <option value="0">선택</option> 이건 쓸려면 0받았을 때 팝업창alter?띄우는 if식으로 가면 될듯-->
+                        <!-- <option value="all">전체</option> 일단 무리 -->
+                        <option value="subject">제목</option>
+                        <option value="writer">작성자</option>
+                        <option value="content">내용</option>
+                  </select></td>
+                  <td><input type="text"
+                     placeholder="검색어 입력" name="searchText" maxlength="100"></td>
+                  <td><button type="submit">검색</button></td>
+               </tr>
+            </table>
+         </form>
 </div>
-
-
 
 </body>
 </html>

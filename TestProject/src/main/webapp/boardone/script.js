@@ -1,4 +1,5 @@
 function writeSave(){
+	alert("검색어를 입력하십시요.");
 	if(document.writeForm.writer.value==""){
 		alert("작성자를 입력하십시요.");
 		document.writeForm.writer.focus();
@@ -28,5 +29,13 @@ function writeSave(){
 		document.writeForm.pass.focus();
 		return false;
 	}
-	
-}
+	return 
+}//end write
+
+function listSave(){
+	if(document.search.searchText.value==""){
+		alert("검색어를 입력하십시요.");
+		document.search.searchText.focus();
+		return false;
+	}
+}//end listSave
