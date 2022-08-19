@@ -148,11 +148,11 @@ public class BoardDAO {
 			conn = ConnUtil.getConnection();
 			
 			//pstmt = conn.prepareStatement("select * from board order by num desc"); 
-			pstmt = conn.prepareStatement("select * from ("
-					+"select rownum rnum, num, writer, email, subject, "
-					+"pass, regdate, readcount, ref, step, depth, content, ip from("
-					+"select * from board order by ref desc, step asc)) "
-					+"where rnum >= ? and rnum <= ?");
+				pstmt = conn.prepareStatement("select * from ("
+						+"select rownum rnum, num, writer, email, subject, "
+						+"pass, regdate, readcount, ref, step, depth, content, ip from("
+						+"select * from board order by ref desc, step asc)) "
+						+"where rnum >= ? and rnum <= ?");
 			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
@@ -406,7 +406,8 @@ public class BoardDAO {
 		return result;
 	}//end deleteArticle
 	
-public int getArticleCount(String searchWhat, String searchText) {
+//검색한 내용이 몇개 있는지를 반환하는 기능(what:검색조건, content:검색내용)
+public int getArticleCount(String what, String content) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -417,7 +418,7 @@ public int getArticleCount(String searchWhat, String searchText) {
 		try {
 			
 			conn = ConnUtil.getConnection();
-			pstmt = conn.prepareStatement("select count(*) from board");
+			pstmt = conn.prepareStatement("select count(*) from board where "+what+" like '%"+content+"%'");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -435,7 +436,9 @@ public int getArticleCount(String searchWhat, String searchText) {
 		return x;
 	}//end getArticleCount
 
-public List<BoardVO> getArticles(int start, int end,String searchWhat, String searchText){
+
+//검색한 내용을 리스트로 받아옴(what:검색조건, content:검색내용,시작번호, 끝번호)시작번호와 끝번호는 페이지처리를 위해
+public List<BoardVO> getArticles(String what, String content, int start, int end){
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -447,11 +450,10 @@ public List<BoardVO> getArticles(int start, int end,String searchWhat, String se
 		
 		conn = ConnUtil.getConnection();
 		
-		//pstmt = conn.prepareStatement("select * from board order by num desc"); 
 		pstmt = conn.prepareStatement("select * from ("
 				+"select rownum rnum, num, writer, email, subject, "
 				+"pass, regdate, readcount, ref, step, depth, content, ip from("
-				+"select * from board order by ref desc, step asc)) "
+				+"select * from board where "+what+" like '%"+content+"%' order by ref desc, step asc)) "
 				+"where rnum >= ? and rnum <= ?");
 		
 		pstmt.setInt(1, start);
