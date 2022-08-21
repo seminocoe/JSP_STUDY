@@ -4,7 +4,9 @@
 <%@ page import="com.boardone.BoardDAO" %>
 <%@ page import="java.sql.Timestamp" %>
 
-<% request.setCharacterEncoding("utf-8");%>
+<%
+request.setCharacterEncoding("utf-8");
+%>
 <jsp:useBean id="article" class="com.boardone.BoardVO" scope="page">
 
 	<jsp:setProperty name = "article" property="*" />
@@ -25,7 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<meta http-equiv="Refresh" content="0;url=content.jsp?num=<%= article.getNum()%>&pageNum=1">
+<meta http-equiv="Refresh" content="0;url=list.jsp?pageNum=<%=pageNum%>">
 </head>
 <body>
 <%}else{%>
