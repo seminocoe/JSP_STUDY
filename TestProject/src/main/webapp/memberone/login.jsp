@@ -33,6 +33,9 @@
 		<td width="100" align="center">
 			<a href="logout.jsp">로그아웃</a>
 		</td>
+		<td width="100" align="center">
+			<a href="../boardone/list.jsp">게시판</a>
+		</td>
 	</tr>
 </table>
 

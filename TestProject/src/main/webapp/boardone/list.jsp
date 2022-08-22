@@ -5,9 +5,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
+<%@ page import = "com.memberone.*" %>
+<jsp:useBean id="dao" class="com.memberone.StudentDAO"/>
 
 <%!
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+%>
+
+<%
+	String loginID = (String)session.getAttribute("loginID");//여기서도 섹션이 죽으면 안되서 살게해줌
+	StudentVO vo = dao.getMember(loginID);
 %>
 
 <%
