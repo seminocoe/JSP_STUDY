@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="view/color.jsp" %>
-<%@ page import = "com.memberone.*" %>
-<jsp:useBean id="dao" class="com.memberone.StudentDAO"/>
 
 <!DOCTYPE html>
 <html>
@@ -13,10 +11,7 @@
 <script type="text/javascript" src="script.js"></script>
 
 </head>
-<%
-	String loginID = (String)session.getAttribute("loginID");//여기서도 섹션이 죽으면 안되서 살게해줌
-	StudentVO vo = dao.getMember(loginID);
-%>
+
 <!-- 새글과 답변글 구분 -->
 
 <%
@@ -51,21 +46,6 @@ try{
 			</td>
 		</tr>
 		
-<%if(loginID != null){ %>
-		<tr>
-			<td width="70" bgcolor="<%=value_c%>" align="center">이름</td>
-			<td width="330">
-				<input type="text" size="12" maxlength="12" name="writer" value="<%=vo.getId()%>" readonly>
-			</td>
-		</tr>
-		
-		<tr>
-			<td width="70" bgcolor="<%=value_c%>" align="center">비밀번호</td>
-			<td width="330">
-				<input type="password" size="10" maxlength="10" name="pass" value="<%=vo.getPass()%>" readonly>
-			</td>
-		</tr>
-<%}else{%>
 		<tr>
 			<td width="70" bgcolor="<%=value_c%>" align="center">이름</td>
 			<td width="330">
@@ -73,14 +53,6 @@ try{
 			</td>
 		</tr>
 		
-		<tr>
-			<td width="70" bgcolor="<%=value_c%>" align="center">비밀번호</td>
-			<td width="330">
-				<input type="password" size="10" maxlength="10" name="pass">
-			</td>
-		</tr>
-<%} %>
-
 		<tr>
 			<td width="70" bgcolor="<%=value_c%>" align="center">이메일</td>
 			<td width="330">
@@ -93,7 +65,7 @@ try{
 			<td width="330">
 			<%if(request.getParameter("num")==null){//새글 %>
 				<input type="text" size="50" maxlength="50" name="subject">
-			<%}else{ %>
+			<%}else{//답변글 %>
 				<input type="text" size="50" maxlength="50" name="subject" value="[답변]">
 			<%} %>
 			</td>
@@ -103,6 +75,13 @@ try{
 			<td width="70" bgcolor="<%=value_c%>" align="center">내용</td>
 			<td width="330">
 				<textarea rows="13" cols="50" name="content"></textarea>
+			</td>
+		</tr>
+		
+		<tr>
+			<td width="70" bgcolor="<%=value_c%>" align="center">비밀번호</td>
+			<td width="330">
+				<input type="password" size="10" maxlength="10" name="pass">
 			</td>
 		</tr>
 		
