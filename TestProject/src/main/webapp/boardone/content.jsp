@@ -5,6 +5,13 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
 
+<%@ page import="com.memberone.*" %>
+<%@ page import="com.comment.*" %>
+<jsp:useBean id="dao" class="com.memberone.StudentDAO"/>
+
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +19,11 @@
 <title>게시판</title>
 <link rel="stylesheet" type="text/css" href="style.css?after">
 </head>
+
+<%
+	String loginID = (String)session.getAttribute("loginID");//여기서도 섹션이 죽으면 안되서 살게해줌
+	StudentVO vo = dao.getMember(loginID);
+%>
 
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
@@ -92,11 +104,80 @@
 		</table>
 <%}catch(Exception e){} %>
 	</form>
-	<br><br><b>댓글</b><br><br>
-	<form action="content.jsp?num=<%= num%>&pageNum=<%=pageNum%>">
-		<textarea rows="5" cols="50" style="resize: none;"></textarea>
-		<input type="submit" value="댓글 작성" style="WIDTH: 40pt; HEIGHT: 40pt">
-	</form>
+	
+	<div>
+			<div>
+				<table style="text-align: center; border: 1px solid #dddddd">
+					<tbody>
+					<tr>
+						<td align="left" bgcolor="beige">댓글</td>
+					</tr>
+					<tr>
+						<%
+							CommentDAO commentDAO = new CommentDAO();
+							ArrayList<CommentVO> list = commentDAO.getList(num);
+							for(int i=0; i<list.size(); i++){
+						%>
+							<div>
+								<div >
+									<table style="text-align: center; border: 1px solid #dddddd">
+										<tbody>
+										<tr>						
+										<td align="left"><%= list.get(i).getUserID() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= list.get(i).getCommentDate().substring(0,11) + list.get(i).getCommentDate().substring(11,13) + "시" + list.get(i).getCommentDate().substring(14,16) + "분" %></td>		
+										<td colspan="2"></td>
+										<td align="right"><%
+													if(list.get(i).getUserID() != null && list.get(i).getUserID().equals(loginID)){
+												%>
+														<form name = "p_search">
+															<a type="button" onclick="nwindow(<%=num %>,<%=list.get(i).getCommentID()%>)">수정</a>
+														</form>	
+														<a onclick="return confirm('정말로 삭제하시겠습니까?')" href = "commentDeleteAction.jsp?num=<%=num %>&commentID=<%= list.get(i).getCommentID() %>">삭제</a>
+																	
+												<%
+													}
+												%>	
+										</td>
+										</tr>
+										<tr>
+											<td colspan="5" align="left"><%= list.get(i).getCommentText() %>
+											<% 	
+												String commentReal = "C:\\jspworkspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\TestProject\\boardone\\img\\uploadImg";
+												File commentFile = new File(commentReal+"\\"+num+"사진"+list.get(i).getCommentID()+".jpg");
+												if(commentFile.exists()){
+											%>	
+											<br><br><img src = "borardone/img/uploadImg/<%=num %>사진<%=list.get(i).getCommentID() %>.jpg" border="300px" width="300px" height="300px"><br><br></td>											
+										<%} %>	
+										</tr>
+										</tbody>
+									</table>			
+						</div>
+					</div>
+					<%
+						}
+					%>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+<div>
+	<div>
+		<form method="post" encType = "multipart/form-data" action="commentAction.jsp?num=<%= num %>">
+			<table style="text-align: center; border: 1px solid #dddddd">
+				<tr>
+					<td style="border-bottom:none;" valign="middle"><br><br><%= loginID %></td>
+					<td><input type="text" style="height:100px;" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "commentText"></td>
+					<td><br><br><input type="submit" value="댓글 작성"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="file" name="fileName"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>	
+	
 	
 </div>
 </body>
