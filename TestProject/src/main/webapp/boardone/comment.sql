@@ -28,15 +28,17 @@ alter table commentDB add constraint bbsID foreign key(num) references board(num
 select * from commentDB;
 
 DELETE FROM commentDB
-           WHERE userID = 'test';
+           WHERE commentDate = NULL;
            
 INSERT INTO commentDB 
 VALUES 
 (
 1,
 65, 
-test, 
-2022-10-08, 
-asd,
+'test', 
+'2022-10-08', 
+'asd',
 1
 );
+
+SELECT SYSDATE FROM DUAL;

@@ -23,7 +23,7 @@ public class CommentDAO {
 		}
 	}
 	public String getDate() {
-		String SQL = "SELECT SYSDATE FROM DUAL;";
+		String SQL = "SELECT SYSDATE FROM DUAL";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -80,7 +80,7 @@ public class CommentDAO {
 		return ""; //오류
 	}
 	public ArrayList<CommentVO> getList(int num){
-		String SQL = "SELECT * FROM commentDB WHERE num= ? AND commentAvailable = 1 ORDER BY num DESC"; 
+		String SQL = "SELECT * FROM commentDB WHERE num= ? AND commentAvailable = 1 ORDER BY commentID"; 
 		ArrayList<CommentVO> list = new ArrayList<CommentVO>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

@@ -53,7 +53,7 @@
 		 		PrintWriter script = response.getWriter();
 		 		script.println("<script>");
 		 		script.println("alert('유효하지 않은 글입니다.')");
-		 		script.println("location.href = 'login.jsp'");
+		 		script.println("location.href = '../memberone/login.jsp'");
 		 		script.println("</script>");
 		 	}
 	 		if (comment.getCommentText() == null){

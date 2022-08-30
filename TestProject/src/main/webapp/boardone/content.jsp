@@ -9,7 +9,7 @@
 <%@ page import="com.comment.*" %>
 <jsp:useBean id="dao" class="com.memberone.StudentDAO"/>
 
-<%@ page import="java.io.*" %>
+<%@page import="java.io.*"%>
 <%@ page import="java.util.*" %>
 
 <!DOCTYPE html>
@@ -123,7 +123,7 @@
 									<table style="text-align: center; border: 1px solid #dddddd">
 										<tbody>
 										<tr>						
-										<td align="left"><%= list.get(i).getUserID() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= list.get(i).getCommentDate().substring(0,11) + list.get(i).getCommentDate().substring(11,13) + "시" + list.get(i).getCommentDate().substring(14,16) + "분" %></td>		
+										<td align="left"><%= list.get(i).getUserID() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= list.get(i).getCommentDate()%></td>		
 										<td colspan="2"></td>
 										<td align="right"><%
 													if(list.get(i).getUserID() != null && list.get(i).getUserID().equals(loginID)){
@@ -145,7 +145,7 @@
 												File commentFile = new File(commentReal+"\\"+num+"사진"+list.get(i).getCommentID()+".jpg");
 												if(commentFile.exists()){
 											%>	
-											<br><br><img src = "borardone/img/uploadImg/<%=num %>사진<%=list.get(i).getCommentID() %>.jpg" border="300px" width="300px" height="300px"><br><br></td>											
+											<br><br><img src = "../boardone/img/uploadImg/<%=num %>사진<%=list.get(i).getCommentID() %>.jpg" border="1px" width="300px" height="300px"><br><br></td>											
 										<%} %>	
 										</tr>
 										</tbody>
@@ -161,7 +161,7 @@
 	</div>
 
 
-<div>
+<div align="center">
 	<div>
 		<form method="post" encType = "multipart/form-data" action="commentAction.jsp?num=<%= num %>">
 			<table style="text-align: center; border: 1px solid #dddddd">

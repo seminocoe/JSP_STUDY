@@ -1,25 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="comment.Comment" %>
-<%@ page import="comment.CommentDAO" %>
+<%@ page import="com.comment.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/custom.css">
 
-<title>맛집 게시판</title>
+<title></title>
 </head>
 <body>
 	<%
-	 int boardID = 0;
-		if (request.getParameter("boardID") != null){
-			boardID = Integer.parseInt(request.getParameter("boardID"));
-		}
-	int bbsID = 0;
-	if (request.getParameter("bbsID") != null){
-		bbsID = Integer.parseInt(request.getParameter("bbsID"));
+	int num = 0;
+	if (request.getParameter("num") != null){
+		num = Integer.parseInt(request.getParameter("num"));
 	}
 	int commentID = 0;
 	if (request.getParameter("commentID") != null){
@@ -28,8 +22,8 @@
 	CommentDAO commentDAO = new CommentDAO();
 	String commentText = commentDAO.getUpdateComment(commentID);
 	%>
-	<div class="container" align="center">
-		<div class="col-lg-10">
+	<div align="center">
+		<div>
 			<div class="jumbotron" style="padding-top: 1px;">				
 				<h3><br>댓글수정창</h3>
 				<form name = c_commentUpdate>
