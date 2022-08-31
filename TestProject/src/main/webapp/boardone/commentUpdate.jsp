@@ -11,6 +11,7 @@
 </head>
 <body>
 	<%
+	String pageNum = request.getParameter("pageNum");
 	int num = 0;
 	if (request.getParameter("num") != null){
 		num = Integer.parseInt(request.getParameter("num"));
@@ -28,7 +29,8 @@
 				<h3><br>댓글수정창</h3>
 				<form name = c_commentUpdate>
 					<input type="text" id="update" style="width:400px;height:50px;" maxlength=1024 value="<%= commentText %>">
-					<input type="button" onclick="send(<%=boardID %>,<%=bbsID %>,<%=commentID %>)" value="수정">
+					<input type="button" onclick="send(<%=num %>,<%=commentID %>)" value="수정">
+					<input type="hidden" name="pageNum" value="<%=pageNum%>">
 					<br><br>
 					<input type="file" id="updatePicture" name="updatePicture"/>		
 				</form>
@@ -40,10 +42,10 @@
 <script>
 	var upload = document.querySelector('#updatePicture');
 	updatePicture.addEvent
-	function send(boardID,bbsID,commentID){
+	function send(num,commentID){
 		var sb;
 		var commentText = document.c_commentUpdate.update.value;
-		sb = "commentUpdateAction.jsp?boardID="+boardID+"&bbsID="+bbsID+"&commentID="+commentID+"&commentText="+commentText;
+		sb = "commentUpdateAction.jsp?num="+num+"&commentID="+commentID+"&commentText="+commentText;
 		window.opener.location.href= sb;
 		window.close();
 	}

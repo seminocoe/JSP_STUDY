@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.boardone.BoardDAO" %>
 <%@ page import="com.boardone.BoardVO" %>
+<%@ page import="com.comment.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
@@ -40,6 +41,9 @@ int count = 0;
 int number = 0;
 List<BoardVO> articleList = null;
 BoardDAO dbPro = BoardDAO.getInstance();
+
+CommentDAO commentDAO = new CommentDAO();
+
 
 //검색이 아니면 전체 목록을 보여주고, 검색이면 검색한 내용만 보여줌
 
@@ -97,6 +101,9 @@ function searchSave() {
 <div align="center"><b>글 목록(전체 글:<%=count %>)</b>
 <table width="700">
 	<tr>
+		<td align="left" bgcolor="<%=value_c%>">
+			<a href="../memberone/login.jsp">로그인</a>
+		</td>
 		<td align="right" bgcolor="<%=value_c%>">
 			<a href="writeForm.jsp">글쓰기</a>
 		</td>
@@ -151,6 +158,14 @@ function searchSave() {
 				
 			<a href="content.jsp?num=<%= article.getNum()%>&pageNum=<%=currentPage%>">
 			<%=article.getSubject()%></a>
+			
+			<% 
+			int cmCnt = commentDAO.countComment(article.getNum());
+			if(cmCnt >= 1) {
+			%>
+			[<%=cmCnt %>]
+			<%}%>
+			
 			<% if(article.getReadcount() >= 20) {%>
 			<img src="img/hot.gif" border="0" height="16">
 			<%} %>

@@ -130,6 +130,7 @@
 												%>
 														<form name = "p_search">
 															<a type="button" onclick="nwindow(<%=num %>,<%=list.get(i).getCommentID()%>)">수정</a>
+															<input type="hidden" name="pageNum" value="<%=pageNum%>">
 														</form>	
 														<a onclick="return confirm('정말로 삭제하시겠습니까?')" href = "commentDeleteAction.jsp?num=<%=num %>&commentID=<%= list.get(i).getCommentID() %>">삭제</a>
 																	
@@ -177,8 +178,15 @@
 		</form>
 	</div>
 </div>	
-	
-	
 </div>
+
+<script type="text/javascript">
+	function nwindow(num,commentID){
+		window.name = "commentParant";
+		var url= "commentUpdate.jsp?num="+num+"&commentID="+commentID;
+		window.open(url,"","width=600,height=230,left=300");
+	}
+</script>
+	
 </body>
 </html>

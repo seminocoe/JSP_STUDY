@@ -4,8 +4,7 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
-<%@ page import="comment.CommentDAO"%>
-<%@ page import="comment.Comment"%>
+<%@ page import="com.comment.*"%>
 <%@ page import="java.io.PrintWriter"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -15,20 +14,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>맛집 게시판</title>
+<title></title>
 <script type="text/javascript">
 	window.name='commentUpdate';
 </script>
 </head>
 <body>
 	<%
+		String pageNum = request.getParameter("currentPage");
 		String userID = null;
-		if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
-			userID = (String) session.getAttribute("userID");//유저아이디에 해당 세션값을 넣어준다.
-		}
-		int boardID = 0;
-		if (request.getParameter("boardID") != null){
-			boardID = Integer.parseInt(request.getParameter("boardID"));
+		if (session.getAttribute("loginID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
+			userID = (String) session.getAttribute("loginID");//유저아이디에 해당 세션값을 넣어준다.
 		}
 		int commentID = 0;
 		if (request.getParameter("commentID") != null){
@@ -43,27 +39,27 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('로그인을 하세요.')");
-			script.println("location.href = 'login.jsp'");
+			script.println("location.href = ../memberone/login.jsp'");
 			script.println("</script>");
 		} 
 		//글이 유효한지 판별
-		int bbsID = 0;
-		if (request.getParameter("bbsID") != null) {
-			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		int num = 0;
+		if (request.getParameter("num") != null) {
+			num = Integer.parseInt(request.getParameter("num"));
 		}
-		if (bbsID == 0) {
+		if (num == 0) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글 입니다.')");
-			script.println("location.href = 'bbs.jsp'");
+			script.println("location.href = './list.jsp'");
 			script.println("</script>");
 		}
-		Comment comment = new CommentDAO().getComment(commentID);
+		CommentVO comment = new CommentDAO().getComment(commentID);
 		if (!userID.equals(comment.getUserID())) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");
-			script.println("location.href = 'bbs.jsp'");
+			script.println("location.href ='./list.jsp'");
 			script.println("</script>");				
 		} else {
 	 		if (comment.getCommentText().equals("")){
@@ -84,7 +80,7 @@
 				} else {
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("location.href= \'view.jsp?boardID="+boardID+"&bbsID="+bbsID+"\'");
+					script.println("location.href= \'content.jsp?num="+num+"&pageNum="+pageNum+"\'");
 					script.println("</script>");
 				}
 			}

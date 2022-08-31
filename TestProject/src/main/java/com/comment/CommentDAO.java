@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.boardone.ConnUtil;
+
 
 public class CommentDAO {
 	private Connection conn;	//db에 접근하는 객체
@@ -145,5 +147,27 @@ public class CommentDAO {
 			e.printStackTrace();
 		}
 		return -1; // 데이터베이스 오류
+	}
+	
+	public int countComment(int commentNum) {
+		
+		int cmt = 0;
+		
+		String SQL = "select count(*) from commentDB where num = ?";
+		try {
+			
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, commentNum);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cmt = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cmt;
 	}
 }

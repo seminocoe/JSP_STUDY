@@ -32,4 +32,15 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
   
+  
+  
+  <servlet>
+  	<servlet-name>myControl</servlet-name>
+  	<servlet-class>com.mvcmem.control.ControlServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+		<servlet-name>myControl</servlet-name>
+		<url-pattern>*.mdo</url-pattern>
+	</servlet-mapping>
+  
 </web-app>
