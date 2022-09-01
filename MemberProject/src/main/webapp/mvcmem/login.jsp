@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
-	String loginID = (String)session.getAttribute("loginID");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="loginID" value="${sessionScope.loginID }"/>
+
     
 <!DOCTYPE html>
 <html>
@@ -14,31 +15,40 @@
 </head>
 <body>
 
-<%
-	if(loginID != null){//로그인 되었을 때 화면 출력
-%>
+<c:choose>
 
+<c:when test="${loginID ne null }">
 <table width="300" border="1">
 	<tr>
-		<td colspan="3" align="center"><%=loginID %>님 환영합니다.</td>
+		<td colspan="3" align="center">
+		<c:out value="${loginID }"/>님 환영합니다.</td>
 	</tr>
 	
 	<tr>
 		<td width="100" align="center">
-			<a href="modifyForm.jsp">정보수정</a>
+			<a href="member.mdo?cmd=modifyForm">정보수정</a>
 		</td>
 		<td width="100" align="center">
-			<a href="deleteForm.jsp">회원탈퇴</a>
+			<a href="member.mdo?cmd=deleteForm">회원탈퇴</a>
 		</td>
 		<td width="100" align="center">
-			<a href="logout.jsp">로그아웃</a>
+			<a href="member.mdo?cmd=logout">로그아웃</a>
 		</td>
 	</tr>
 </table>
+</c:when>
 
-<%}else{ %>
+<c:otherwise>
 
-<form action="loginProc.jsp" method="post">
+<c:if test="${request.check eq 0 }">
+<script type="text/javascript">alert('비밀번호가 틀렸습니다.')</script>
+</c:if>
+
+<c:if test="${request.check eq -1 }">
+<script type="text/javascript">alert('아이디가 존재하지 않습니다.')</script>
+</c:if>
+
+<form action="member.mdo?cmd=loginProc" method="post">
 <table width="300" border="1" >
 	<tr>
 		<td colspan="2" align="center">회원 로그인</td>
@@ -62,13 +72,14 @@
 		<td colspan="2" align="center">
 			<input type="submit" value="로그인">&nbsp;&nbsp;
 			<input type="button" value="회원가입" 
-			onclick="javascript:window.location='regForm.jsp'">
+			onclick="javascript:window.location='member.mdo?cmd=regForm'">
 		</td>
 	</tr>
 </table>
 </form>
+</c:otherwise>
 
-<%} %>
+</c:choose>
 
 </body>
 </html>

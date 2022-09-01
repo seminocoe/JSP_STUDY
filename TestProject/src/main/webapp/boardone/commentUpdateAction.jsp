@@ -21,7 +21,9 @@
 </head>
 <body>
 	<%
-		String pageNum = request.getParameter("currentPage");
+		/* String pageNum = (String)request.getAttribute("pageNum"); */
+		String pageNum = ("1");
+		System.out.println(pageNum);
 		String userID = null;
 		if (session.getAttribute("loginID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 			userID = (String) session.getAttribute("loginID");//유저아이디에 해당 세션값을 넣어준다.

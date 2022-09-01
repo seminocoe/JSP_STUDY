@@ -18,7 +18,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 가입 확인</title>
-<link rel="sttlesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body bgcolor="#FFFFCC">
 <br><Br>

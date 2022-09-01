@@ -12,6 +12,7 @@
 <body>
 	<%
 	String pageNum = request.getParameter("pageNum");
+	System.out.println(pageNum);
 	int num = 0;
 	if (request.getParameter("num") != null){
 		num = Integer.parseInt(request.getParameter("num"));
@@ -30,7 +31,7 @@
 				<form name = c_commentUpdate>
 					<input type="text" id="update" style="width:400px;height:50px;" maxlength=1024 value="<%= commentText %>">
 					<input type="button" onclick="send(<%=num %>,<%=commentID %>)" value="수정">
-					<input type="hidden" name="pageNum" value="<%=pageNum%>">
+					<input type="hidden" name="pageNum" value="<%=pageNum%>"><!-- 넣어봤는데 작용 ㄴ -->
 					<br><br>
 					<input type="file" id="updatePicture" name="updatePicture"/>		
 				</form>
@@ -40,8 +41,8 @@
 	</div>
 </body>
 <script>
-	var upload = document.querySelector('#updatePicture');
-	updatePicture.addEvent
+	/* var upload = document.querySelector('#updatePicture');
+	updatePicture.addEvent */
 	function send(num,commentID){
 		var sb;
 		var commentText = document.c_commentUpdate.update.value;

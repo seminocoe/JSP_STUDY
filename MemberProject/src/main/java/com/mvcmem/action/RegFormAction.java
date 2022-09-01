@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvcmem.control.ActionForward;
 
-public class regFormAction implements Action {
+public class RegFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
