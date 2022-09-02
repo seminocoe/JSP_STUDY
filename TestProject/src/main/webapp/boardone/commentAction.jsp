@@ -36,6 +36,7 @@
 		String commentText = multi.getParameter("commentText");
 		comment.setCommentText(commentText);
 		
+		
 	 	if(userID == null){
 	 		PrintWriter script = response.getWriter();
 	 		script.println("<script>");

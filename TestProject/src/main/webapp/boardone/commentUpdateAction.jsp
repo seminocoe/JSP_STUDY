@@ -6,6 +6,7 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page import="com.comment.*"%>
 <%@ page import="java.io.PrintWriter"%>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	//sresponse.setContentType("text/html; charset=UTF-8");
@@ -15,15 +16,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	window.name='commentUpdate';
-</script>
+</script> -->
 </head>
 <body>
 	<%
-		/* String pageNum = (String)request.getAttribute("pageNum"); */
 		String pageNum = ("1");
-		System.out.println(pageNum);
+	
 		String userID = null;
 		if (session.getAttribute("loginID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 			userID = (String) session.getAttribute("loginID");//유저아이디에 해당 세션값을 넣어준다.
@@ -81,6 +81,18 @@
 					script.println("</script>");
 				} else {
 					PrintWriter script = response.getWriter();
+					
+				/* 	if(fileName != null){
+						String real = "C:\\jspworkspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\TestProject\\boardone\\img\\uploadImg";
+						File delFile = new File(real+"\\"+num+"사진"+(commentID-1)+".jpg");
+						if(delFile.exists()){
+							delFile.delete();
+						}
+							File oldFile = new File(realFolder+"\\"+fileName);
+							File newFile = new File(realFolder+"\\"+num+"사진"+(commentID-1)+".jpg");
+							oldFile.renameTo(newFile);
+						} */
+					
 					script.println("<script>");
 					script.println("location.href= \'content.jsp?num="+num+"&pageNum="+pageNum+"\'");
 					script.println("</script>");

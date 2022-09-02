@@ -28,7 +28,6 @@
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
-	System.out.println(pageNum);
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
@@ -131,7 +130,6 @@
 												%>
 														<form name = "p_search">
 															<a type="button" onclick="nwindow(<%=num %>,<%=list.get(i).getCommentID()%>)">수정</a>
-															<input type="hidden" name="pageNum" value="<%=pageNum%>"><!-- 일단 넣어본 건데 작용 안함 -->
 														</form>	
 														<a onclick="return confirm('정말로 삭제하시겠습니까?')" href = "commentDeleteAction.jsp?num=<%=num %>&commentID=<%= list.get(i).getCommentID() %>">삭제</a>
 																	
