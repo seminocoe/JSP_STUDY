@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Log in</title>
+<script type="text/javascript" src="script.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -40,11 +41,11 @@
 
 <c:otherwise>
 
-<c:if test="${request.check eq 0 }">
+<c:if test="${requestScope.check eq 0 }">
 <script type="text/javascript">alert('비밀번호가 틀렸습니다.')</script>
 </c:if>
 
-<c:if test="${request.check eq -1 }">
+<c:if test="${requestScope.check eq -1 }">
 <script type="text/javascript">alert('아이디가 존재하지 않습니다.')</script>
 </c:if>
 
