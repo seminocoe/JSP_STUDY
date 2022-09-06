@@ -36,6 +36,8 @@ public class ListAction implements CommandAction {
 		List<BoardVO> articleList = null;
 		BoardDAO dbPro = BoardDAO.getInstance();
 
+		count = dbPro.getArticleCount();
+		
 		if(count > 0){//현재 페이지에 해당 하는 글의 목록
 			//전체 글 수가 하나라도 존재하면 리스트를 출력
 			articleList = dbPro.getArticles(startRow, endRow);
@@ -46,11 +48,12 @@ public class ListAction implements CommandAction {
 		number = count - (currentPage -1) * pageSize;
 
 		//해당 뷰에서 사용할 속성 저장
-		request.setAttribute("currentPage", new Integer(currentPage));
-		request.setAttribute("startRow", new Integer(startRow));
-		request.setAttribute("endRow", new Integer(endRow));
-		request.setAttribute("count", new Integer(count));
-		request.setAttribute("pageSize", new Integer(pageSize));
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", startRow);
+		request.setAttribute("endRow", endRow);
+		request.setAttribute("count", count);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("number", number);
 		request.setAttribute("articleList", articleList);
 		
 		//해당 뷰로 반환 해줌

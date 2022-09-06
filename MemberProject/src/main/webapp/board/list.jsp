@@ -37,7 +37,7 @@
 <c:if test="${count > 0 }">
 <table width="700" border="1" cellpadding="0" cellspacing="0" align="center">
 
-	<tr height="30" bgcolor="<%=value_c%>">
+	<tr height="30" bgcolor="${value_c }">
 		<td align="center" width="50">번호</td>
 		<td align="center" width="250">제목</td>
 		<td align="center" width="100">작성자</td>
@@ -46,128 +46,88 @@
 		<td align="center" width="100">IP</td>
 	</tr>
 	
-<%
-	for(int i = 0; i < articleList.size(); i++){
-		BoardVO article = (BoardVO)articleList.get(i);
-		
-%>
+<c:forEach var="article" items="${articleList }">
 
 	<tr height="30">
 		<td align="center" width="50">
-			<%=number-- %>
+		<c:out value="${number }"/>
+		<c:set var="number" value="${number - 1 }"/>
 		</td>
+		
 		<td width="250">
-		
-		<%
-		int wid = 0;
-		
-		if(article.getDepth() > 0) {
-			wid = 5 * (article.getDepth());
-		%>
-			<img src="img/level.gif" width="<%=wid%>" height="16">
+		<c:if test="${article.depth > 0}">
+			<img src="img/level.gif" width="${5 * article.depth }" height="16">
 			<img src="img/re.gif">
-		<%}else{%>
-			<img src="img/level.gif" width="<%=wid%>" height="16">
-		<%} %>
-				
-			<a href="content.jsp?num=<%= article.getNum()%>&pageNum=<%=currentPage%>">
-			<%=article.getSubject()%></a>
-			<% if(article.getReadcount() >= 20) {%>
-			<img src="img/hot.gif" border="0" height="16">
-			<%} %>
+		</c:if>
+		<c:if test="${article.depth == 0}">
+			<img src="img/level.gif" width="${5 * article.depth }" height="16">
+		</c:if>
+			<a href="/MemberProject/board/content.bdo?num=${article.num }&pageNum=${currentPage }">
+			${article.subject }</a>
+			<c:if test="${article.readcount >= 20 }">
+				<img src="img/hot.gif" border="0" height="16">
+			</c:if>
 		</td>
 		
 		<td align="center" width="100">
-			<a href ="mailto:<%=article.getEmail()%>">
-			<%=article.getWriter()%></a>
+			<a href ="mailto:${article.email }">
+			${article.writer }</a>
 		</td>
 		
 		<td align="center" width="150">
-			<%=sdf.format(article.getRegdate())%>
+			${article.regdate }
 		</td>
 		
 		<td align="center" width="50">
-			<%=article.getReadcount()%>
+			${article.readcount }
 		</td>
 		
 		<td align="center" width="100">
-		<%=article.getIp()%>
+		${article.ip }
 		</td>
 		
-	</tr> 
-
-<%}//end for %>
-
+	</tr>
+	 
+</c:forEach>
 </table>
+</c:if>
 
-<%}//end else %>
+<!-- //페이지 블럭 -->
+<c:if test="${count > 0 }">
 
-<%
-//페이지 블럭
+	<c:set var="pageBlock" value="${5 }"/>
+	<c:set var="imsi" value="${count % pageSize == 0 ? 0:1}"/>
+	<c:set var="pageCount" value="${count / pageSize + imsi}"/>
 
-if(count > 0){
+<!-- 	//시작 페이지 -->
+	<fmt:parseNumber var="result" value="${(currentPage-1) / pageBlock }" integerOnly="true"/>
+	<c:set var="startPage" value="${result * pageBlock + 1}"/>
 	
-	int pageBlock = 4;
-
-	int imsi = count % pageSize == 0? 0:1;
+<!-- 	//마지막 페이지 -->
+	<c:set var="endPage" value="${startPage + pageBlock -1}"/>
 	
-	int pageCount = count/pageSize + imsi;
+<!-- 	//마지막으로 보여줄 페이지 -->
+	<c:if test="${endPage > pageCount }">
+		<c:set var="endPage" value="${endPage }"/>
+	</c:if>
 	
-	//시작 페이지
-	int startPage = (int)((currentPage-1)/pageBlock)*pageBlock+1;	
+<!-- 	//페이지 블럭을 이전과 다음 작업 -->
+	<c:if test="${startPage > pageBlock }">	
+		<a href="/MemberProject/board/list.bdo?pageNum=1">[<<]</a>
+		<a href="/MemberProject/board/list.bdo?pageNum=${startPage-pageBlock }">[이전]</a>
+		<a href="/MemberProject/board/list.bdo?pageNum=${currentPage - 1 }">[<]</a>
+	</c:if>
 	
-	//마지막 페이지
-	int endPage = startPage + pageBlock -1;
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<a href="/MemberProject/board/list.bdo?pageNum=${i }">[${i }]</a>
+	</c:forEach>
 	
-	//마지막으로 보여줄 페이지
-	if(endPage > pageCount)endPage = pageCount;
-	
-	//페이지 블럭을 이전과 다음 작업
-	if(startPage > pageBlock){
-		//검색일 경우와 아닐 경우 페이지 처리
-		if(searchText == null){
-%>
-	<a href="list.jsp?pageNum=1">[<<]</a>
-	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a>
-	<a href="list.jsp?pageNum=<%=(Integer.parseInt(pageNum)-1)%>">[<]</a>
-	<%}else{%>
-	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[이전]</a>
-<%
-	}//end else
-}//end if
-for(int i = startPage; i <= endPage; i++){
-	if(searchText == null){
-%>
-<a href="list.jsp?pageNum=<%=i %>">[<%=i%>]</a>
-	<%}else{ %>
-<a href="list.jsp?pageNum=<%=i %>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[<%=i%>]</a>
-<%
-		}//end else
-	}//end for
-	if(endPage < pageCount){
-		if(searchText == null){
-%>	
-	<a href="list.jsp?pageNum=<%=(Integer.parseInt(pageNum)+1)%>">[>]</a>
-	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a>
-	<a href="list.jsp?pageNum=<%=pageCount%>">[>>]</a>
-	<%}else{ %>
-	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[다음]</a>
-<%
-		}//endelse
-	}//end if
-}//end 종합 if(count > 0)
-%>	
-<!-- 검색 창 -->
-<form action="list.jsp">
-	<select name="searchWhat">
-		<option value="writer">작성자</option>
-		<option value="subject">제목</option>
-		<option value="content">내용</option>
-	</select>
-	<input type="text" name="searchText">
-	<input type="submit" value="검색">
-</form>
+	<c:if test="${endPage < pageCount}">	
+		<a href="/MemberProject/board/list.bdo?pageNum=${currentPage + 1}">[>]</a>
+		<a href="/MemberProject/board/list.bdo?pageNum=${startPage+pageBlock}">[다음]</a>
+		<a href="/MemberProject/board/list.bdo?pageNum=${pageCount }">[>>]</a>
+	</c:if>	
+</c:if>
 </div>
-
 </body>
 </html>
