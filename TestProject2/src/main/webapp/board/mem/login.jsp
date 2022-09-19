@@ -72,8 +72,8 @@
 	<tr>
 		<td colspan="2" align="center">
 			<input type="submit" value="로그인">&nbsp;&nbsp;
-			<input type="button" value="회원가입" 
-			onclick="javascript:window.location='member.mdo?cmd=regForm'">
+			<input type="button" value="게시판" 
+			onclick="javascript:window.location='/TestProject2/board/list.bdo'">
 		</td>
 	</tr>
 </table>
