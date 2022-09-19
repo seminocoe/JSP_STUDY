@@ -1,4 +1,4 @@
-package com.evaluation;
+package com.evaluation.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

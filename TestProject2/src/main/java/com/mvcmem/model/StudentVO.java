@@ -1,4 +1,4 @@
-package com.memberone;
+package com.mvcmem.model;
 
 public class StudentVO {
 
@@ -13,7 +13,22 @@ public class StudentVO {
    private String Address1;
    private String Address2;
    
-   public String getId() {
+   public StudentVO() {}
+   public StudentVO(String id, String pass, String name, String phone1, String phone2,
+		   String phone3, String email,String zipcode, String address1, String address2) {
+	this.id = id;
+	this.pass = pass;
+	this.name = name;
+	this.phone1 = phone1;
+	this.phone2 = phone2;
+	this.phone3 = phone3;
+	this.email = email;
+	this.zipcode = zipcode;
+	this.Address1 = address1;
+	this.Address2 = address2;
+}
+   
+public String getId() {
       return id;
    }
    public void setId(String id) {

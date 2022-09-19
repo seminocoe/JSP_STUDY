@@ -1,4 +1,4 @@
-package com.evaluation;
+package com.evaluation.model;
 
 public class EvaluationVO {
 	

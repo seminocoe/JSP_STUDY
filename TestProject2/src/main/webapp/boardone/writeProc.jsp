@@ -67,7 +67,7 @@ dbPro.insertArticle(article);
 
 	if(fileName != null){
 		File oldFile = new File(realFolder+"\\"+fileName);
-		File newFile = new File(realFolder+"\\"+uid+".jpg");
+		File newFile = new File(realFolder+"\\"+uidName+".jpg");
 		oldFile.renameTo(newFile);
 	}
 

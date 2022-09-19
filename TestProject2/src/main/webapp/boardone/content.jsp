@@ -21,15 +21,7 @@
 <title>게시판</title>
 <link rel="stylesheet" type="text/css" href="style.css?after">
 <script type="text/javascript">
-function checkText() {
-	if(commentInputForm.commentText.value==""){
-		alert("댓글을 입력하세요.");
-		commentInputForm.commentText.focus();
-		return false;
-	}else{
-		return true;
-	}
-}
+
 
 </script>
 </head>

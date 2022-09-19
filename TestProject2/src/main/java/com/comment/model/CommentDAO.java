@@ -1,4 +1,4 @@
-package com.comment;
+package com.comment.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

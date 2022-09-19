@@ -15,25 +15,27 @@
 </head>
 <body bgcolor="${bodyback_c }">
 
+<c:set var="loginID" value="${sessionScope.loginID }"/>
+
 <div align="center"><b><a href="/TestProject2/board/list.bdo?pageNum=1">글 목록</a>(전체 글:${count })</b>
 <table width="700">
 	<tr>
 	<c:choose>
-		<c:when test="${login == null }">
+		<c:when test="${loginID == null }">
 			<td align="left" bgcolor="${value_c }">
 			<!-- 위치 수정해야함 -->
-				<a href="../memberone/login.jsp">로그인</a>
+				<a href="/TestProject2/board/mem/loginForm.bdo">로그인</a>
 			</td>
 		</c:when>
 		<c:otherwise>
 			<td align="left" bgcolor="${value_c }">
 			<!-- 위치 수정해야함 -->
-				<a href="../memberone/logout.jsp">로그아웃</a>
+				<a href="/TestProject2/board/mem/logout.bdo">로그아웃</a>
 			</td>
 		</c:otherwise>
 	</c:choose>
 		<td align="right" bgcolor="${value_c }">
-			<a href="/TestProject2/board/writeForm.bdo">글쓰기</a>
+			<a onclick="return loginIdCheck()">글쓰기</a>
 		</td>
 	</tr>
 </table>
@@ -81,11 +83,10 @@
 			<a class="my_text" href="/TestProject2/board/content.bdo?num=${article.num }&pageNum=${currentPage }">
 			${article.subject }</a>
 			<c:if test="${article.imageUID != null }">
-				<img class="my_img" src = "../boardone/img/uploadImg/${article.imageUID }.jpg" border="1px" width="150px" height="150px">
+				<img class="my_img" src = "../board/img/uploadImg/${article.imageUID }.jpg" border="1px" width="150px" height="150px">
 			</c:if>
-			<!-- 그냥 안불러질 거임 
-			int cmCnt = commentDAO.countComment(article.getNum());
-		 	-->
+		 	<c:set var="num" value="${article.num }"></c:set>
+		 	<c:set var="cmCnt" value="${commentDAO.countComment(num) }"></c:set>
 			<c:if test="${cmCnt >= 1 }">
 				[${cmCnt }]
 			</c:if>
@@ -108,9 +109,7 @@
 		</td>
 		
 		<td align="center" width="50">
-		<!-- 그냥 안불러질 거임 
-		int evCnt = evaluationDAO.countGechu(article.getNum());
-		 -->
+		 <c:set var="evCnt" value="${evaluationDAO.countGechu(num) }"></c:set>
 			${evCnt }
 		</td>
 		

@@ -1,30 +1,43 @@
-package com.memberone;
+package com.mvcmem.model;
 
 import java.sql.*;
 import javax.sql.*;
+
 import javax.naming.*;
 import java.util.*;
 
 public class StudentDAO {
 
-	DataSource ds;
-
+	private static StudentDAO instance = null;
+	
+	private StudentDAO() {	}
+	
+	public static StudentDAO getInstance() {
+		
+		if(instance == null) {
+			synchronized (StudentDAO.class) {
+				instance = new StudentDAO();
+			}
+		}
+		return instance;
+	}
+	
 	private Connection getConnection() {
-
+		
 		Connection conn = null;
 
 		try {
 
 			Context initContext = new InitialContext();
-
-			ds = (DataSource) initContext.lookup("java:/comp/env/jdbc/myoracle");
-
+			DataSource ds = (DataSource) initContext.lookup("java:/comp/env/jdbc/myoracle");
 			conn = ds.getConnection();
 
-		} catch (Exception e) {
-
+		} catch (NamingException e) {
 			System.out.println("Connection 생성 실패....");
-
+			e.printStackTrace();
+		} catch(SQLException e) {
+			System.out.println("Connection 생성 실패....");
+			e.printStackTrace();
 		}
 
 		return conn;

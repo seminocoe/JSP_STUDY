@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.BoardDAO;
 import com.board.model.BoardVO;
+import com.comment.model.*;
+import com.evaluation.model.*;
+
 //글 목록을 처리하는 클래스
 public class ListAction implements CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		
 		
 
 		String pageNum = request.getParameter("pageNum");
@@ -63,6 +65,9 @@ public class ListAction implements CommandAction {
 			
 		}
 		
+		CommentDAO commentDAO = new CommentDAO();
+		EvaluationDAO evaluationDAO = new EvaluationDAO();
+		
 		//글 목록에 표시할 글 번호
 		number = count - (currentPage -1) * pageSize;
 		
@@ -81,6 +86,8 @@ public class ListAction implements CommandAction {
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("searchWhat", searchWhat);
 		request.setAttribute("searchText", searchText);
+		request.setAttribute("commentDAO", commentDAO);
+		request.setAttribute("evaluationDAO", evaluationDAO);
 		
 		//해당 뷰로 반환 해줌
 		return "/board/list.jsp";

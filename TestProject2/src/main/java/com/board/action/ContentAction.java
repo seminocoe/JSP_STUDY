@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.BoardDAO;
 import com.board.model.BoardVO;
+import com.evaluation.model.EvaluationDAO;
 
 public class ContentAction implements CommandAction {
 
@@ -20,6 +21,7 @@ public class ContentAction implements CommandAction {
 			request.setAttribute("num", num);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("article", article);
+			request.setAttribute("evaluationDAO", new EvaluationDAO());
 			
 		return "/board/content.jsp";
 	}

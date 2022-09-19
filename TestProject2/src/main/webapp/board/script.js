@@ -43,11 +43,27 @@ function loginIdCheck(){
 	
 	if(loginID == 'null'){
 		alert('로그인이 필요한 기능입니다.');
- 		location.href = '../memberone/login.jsp';
+ 		location.href = '/TestProject2/board/mem/loginForm.bdo';
  		return true;
  	}else{
-	 	location.href = '../boardone/writeForm.jsp';
+	 	location.href = '/TestProject2/board/writeForm.bdo';
  		return true;
  	}
 	
+}
+
+function checkText() {
+	if(commentInputForm.commentText.value==""){
+		alert("댓글을 입력하세요.");
+		commentInputForm.commentText.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function nwindow(num,commentID,pageNum){
+		window.name = "commentParant";
+		var url= "commentUpdate.jsp?num="+num+"&commentID="+commentID;
+		window.open(url,"","width=600,height=230,left=300");
 }

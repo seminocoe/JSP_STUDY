@@ -1,4 +1,4 @@
-package com.memberone;
+package com.mvcmem.model;
 
 public class ZipCodeVO {
 

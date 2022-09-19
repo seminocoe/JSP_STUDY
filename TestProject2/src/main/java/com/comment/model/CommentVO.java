@@ -1,4 +1,4 @@
-package com.comment;
+package com.comment.model;
 
 public class CommentVO {
 	private int commentID;
