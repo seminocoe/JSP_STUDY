@@ -12,6 +12,8 @@ import com.comment.model.CommentDAO;
 import com.comment.model.CommentVO;
 import com.evaluation.model.EvaluationDAO;
 import com.evaluation.model.EvaluationVO;
+import com.mvcmem.model.StudentDAO;
+import com.mvcmem.model.StudentVO;
 
 public class ContentAction implements CommandAction {
 
@@ -27,6 +29,8 @@ public class ContentAction implements CommandAction {
 			EvaluationDAO evaDAO = new EvaluationDAO();
 			int gechuCnt = evaDAO.countGechu(num);
 			
+			StudentDAO dao  = StudentDAO.getInstance();
+			
 			int gechu = 0;
 			int bichu = 0;
 			ArrayList<EvaluationVO> listEva = evaDAO.getList(num);
@@ -41,10 +45,6 @@ public class ContentAction implements CommandAction {
 			String commentReal = "C:\\jspworkspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\TeamProject_GlobalIn\\boardone\\img\\uploadImg";
 			/* String commentReal = "C:\\Users\\SUCCU\\Desktop\\JSP_STUDY\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\TeamProject\\boardone\\img\\uploadImg"; */
 			
-			/* 이거 어케함
-			 * File commentFile = new File(commentReal+"\\"+num+"사진"+list.get(i).getCommentID()+".jpg");
-			 */
-			
 			String real = "C:\\jspworkspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\TeamProject_GlobalIn\\boardone\\img\\uploadImg";
 			File viewFile = new File(real+"\\"+article.getImageUID()+".jpg");
 			
@@ -57,6 +57,7 @@ public class ContentAction implements CommandAction {
 			request.setAttribute("gechu", gechu);
 			request.setAttribute("bichu", bichu);
 			request.setAttribute("list", list);
+			request.setAttribute("dao", dao);
 			
 		return "/board/content.jsp";
 	}

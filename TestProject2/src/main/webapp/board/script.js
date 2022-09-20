@@ -30,6 +30,7 @@ function writeSave(){
 	}
 	
 }
+
 function searchSave() {
 	if(document.search.searchText.value==""){
 		alert("검색어를 입력하십시요.");
@@ -38,10 +39,10 @@ function searchSave() {
 	}
 	
 }
-function loginIdCheck(){
-	var loginID = '<%=(String)session.getAttribute("loginID")%>';
+
+function loginIdCheck(loginID){
 	
-	if(loginID == 'null'){
+	if(loginID == ''){
 		alert('로그인이 필요한 기능입니다.');
  		location.href = '/TestProject2/board/mem/loginForm.bdo';
  		return true;

@@ -8,6 +8,7 @@ public class CommentVO {
 	private String commentDate;
 	private String commentText;
 	private int commentAvilable;
+	private String imageUID;
 	
 	public int getCommentID() {
 		return commentID;
@@ -50,5 +51,11 @@ public class CommentVO {
 	}
 	public void setCommentAvilable(int commentAvilable) {
 		this.commentAvilable = commentAvilable;
+	}
+	public String getImageUID() {
+		return imageUID;
+	}
+	public void setImageUID(String imageUID) {
+		this.imageUID = imageUID;
 	}
 }

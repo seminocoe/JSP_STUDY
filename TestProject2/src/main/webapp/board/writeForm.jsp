@@ -12,11 +12,23 @@
 <script type="text/javascript" src="script.js"></script>
 
 </head>
+<c:set var="loginID" value="${sessionScope.loginID }"/>
+<c:set var="vo" value="${dao.getMember(loginID)}"/>
 
+<%-- 
+int num=0, ref=1, step=0, depth=0;
+try{
+	if(request.getParameter("num")!= null){
+		num = Integer.parseInt(request.getParameter("num"));
+		ref = Integer.parseInt(request.getParameter("ref"));
+		step = Integer.parseInt(request.getParameter("step"));
+		depth = Integer.parseInt(request.getParameter("depth"));
+	}
+ --%>
 <body bgcolor="${bodyback_c }">
 
 <div align="center"><b>글 쓰기</b><br><br>
-	<form action="/MemberProject/board/writePro.bdo" method="post" name="writeForm" onsubmit="return writeSave()">
+	<form action="/TestProject2/board/writePro.bdo" method="post" name="writeForm" onsubmit="return writeSave()" encType = "multipart/form-data">
 	
 		<input type="hidden" name="num" value="${num }">
 		<input type="hidden" name="ref" value="${ref }">
@@ -27,14 +39,14 @@
 		align="center" bgcolor="${bodyback_c }">
 		<tr>
 			<td align="right" colspan="2" bgcolor="${value_c }">
-				<a href="/MemberProject/board/list.bdo">글 목록</a>
+				<a href="/TestProject2/board/list.bdo">글 목록</a>
 			</td>
 		</tr>
 		
 		<tr>
 			<td width="70" bgcolor="${value_c }" align="center">이름</td>
 			<td width="330">
-				<input type="text" size="12" maxlength="12" name="writer">
+				<input type="text" size="12" maxlength="12" name="writer" readonly="readonly" value="${vo.name }">
 			</td>
 		</tr>
 		
@@ -72,12 +84,16 @@
 				<input type="password" size="10" maxlength="10" name="pass">
 			</td>
 		</tr>
-		
+		<tr>
+		<td colspan="2" align="center">
+				<input type="file" name="fileName">
+		</td>
+		</tr>
 		<tr>
 			<td colspan="2" bgcolor="${value_c }" align="center">
 				<input type="submit" value="글쓰기">
 				<input type="reset" value="다시작성">
-				<input type="button" value="목록" onclick="window.location='/MemberProject/board/list.bdo'">
+				<input type="button" value="목록" onclick="window.location='/TestProject2/board/list.bdo'">
 			</td>
 		</tr>
 		</table>

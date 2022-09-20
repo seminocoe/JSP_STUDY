@@ -35,7 +35,7 @@
 		</c:otherwise>
 	</c:choose>
 		<td align="right" bgcolor="${value_c }">
-			<a onclick="return loginIdCheck()">글쓰기</a>
+			<a onclick="return loginIdCheck('${loginID }')">글쓰기</a>
 		</td>
 	</tr>
 </table>

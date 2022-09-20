@@ -48,8 +48,8 @@ public class CommentDAO {
 		}
 		return 1; //첫번째 댓글인 경우
 	}
-	public int write(int num, String userID, String commentText, String userName) {
-		String SQL = "INSERT INTO commentDB VALUES(?, ?, ?, ?, ?, ?,?)";
+	public int write(int num, String userID, String commentText, String userName, String imageUID) {
+		String SQL = "INSERT INTO commentDB VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
@@ -59,6 +59,7 @@ public class CommentDAO {
 			pstmt.setString(5, getDate());
 			pstmt.setString(6, commentText);
 			pstmt.setInt(7, 1);
+			pstmt.setString(8, imageUID);
 			pstmt.executeUpdate();
 			return getNext();
 		}catch(Exception e) {
@@ -96,6 +97,7 @@ public class CommentDAO {
 				cmt.setCommentDate(rs.getString(5));
 				cmt.setCommentText(rs.getString(6));
 				cmt.setCommentAvilable(rs.getInt(7));
+				cmt.setImageUID(rs.getString(8));
 				list.add(cmt);
 			}
 		}catch(Exception e) {
@@ -131,6 +133,7 @@ public class CommentDAO {
 				cmt.setCommentDate(rs.getString(5));
 				cmt.setCommentText(rs.getString(6));
 				cmt.setCommentAvilable(rs.getInt(7));
+				cmt.setImageUID(rs.getString(8));
 				return cmt;
 			}
 		}catch(Exception e) {
