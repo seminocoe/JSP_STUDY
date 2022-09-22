@@ -8,10 +8,12 @@
 <meta charset="UTF-8">
 
 	<c:if test="${check == 1 }">
-		<meta http-equiv="Refresh" content="0;url=/MemberProject/board/list.bdo">
+		<meta http-equiv="Refresh" content="0;url=/TestProject2/board/list.bdo">
 	</c:if>
 	
 	<c:if test="${check == 0 }">
-	비밀번호가 다릅니다.
-	<a href="javascript:history.go(-1)">[비밀번호 입력부분으로 돌아가기]</a>
+	<script type="text/javascript">
+		alert("비밀번호가 맞지 않습니다.");
+		history.go(-1);//이전페이지로 가는건데 or history.back();
+	</script>
 	</c:if>

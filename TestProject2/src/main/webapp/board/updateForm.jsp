@@ -16,8 +16,8 @@
 
 <div align="center"><b>글 수정</b><br><br>
 
-	<form action="/MemberProject/board/updatePro.bdo?pageNum=${pageNum }"
-	 method="post" name="writeForm" onsubmit="return writeSave()">
+	<form action="/TestProject2/board/updatePro.bdo?pageNum=${pageNum }"
+	 method="post" name="writeForm" onsubmit="return writeSave()" encType = "multipart/form-data">
 	
 		<table width="400" border="1" cellpadding="0" cellspacing="0" 
 		align="center" bgcolor="${bodyback_c }">
@@ -26,8 +26,9 @@
 			<td width="70" bgcolor="${value_c }" align="center">이름</td>
 			<td width="330" align="left">
 				<input type="text" size="12" maxlength="12" 
-				name="writer" value="${article.writer }">
+				name="writer" value="${article.writer }" readonly="readonly">
 				<input type="hidden" name ="num" value="${article.num }">
+				<input type="hidden" name ="imageUID" value="${article.imageUID }">
 			</td>
 		</tr>
 		
@@ -49,6 +50,7 @@
 			<td width="70" bgcolor="${value_c }" align="center">내용</td>
 			<td width="330" align="left">
 				<textarea rows="13" cols="50" name="content">${article.content }</textarea>
+				
 			</td>
 		</tr>
 		
@@ -60,11 +62,17 @@
 		</tr>
 		
 		<tr>
+			<td colspan="2" align="center">
+				<input type="file" name="fileName">
+			</td>
+		</tr>
+		
+		<tr>
 			<td colspan="2" bgcolor="${value_c }" align="center">
 				<input type="submit" value="글수정">
 				<input type="reset" value="다시작성">
 				<input type="button" value="목록" 
-				onclick="window.location.href='/MemberProject/board/list.bdo?pageNum=${pageNum }'">
+				onclick="window.location.href='/TestProject2/board/list.bdo?pageNum=${pageNum }'">
 			</td>
 		</tr>
 		</table>

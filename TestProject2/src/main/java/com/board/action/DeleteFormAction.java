@@ -13,9 +13,11 @@ public class DeleteFormAction implements CommandAction {
 
 		String pageNum = request.getParameter("pageNum");
 		int num = Integer.parseInt(request.getParameter("num"));
+		String imageUID = request.getParameter("imageUID");
 				
 		request.setAttribute("num", num);
 		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("imageUID", imageUID);
 		
 		return "/board/deleteForm.jsp";
 	}

@@ -74,7 +74,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 
 					<input type="button" value="글삭제"
-					onclick="document.location.href='/TestProject2/board/deleteForm.bdo?num=${article.num }&pageNum=${pageNum }'">
+					onclick="document.location.href='/TestProject2/board/deleteForm.bdo?num=${article.num }&pageNum=${pageNum }&imageUID=${article.getImageUID() }'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 						</c:if>
 					
@@ -90,8 +90,8 @@
 			</tr>
 			
 			<tr align="center">
-				<td colspan="2"><input type="button" onclick="location.href='evaluationAction.jsp?gechu=1&bichu=0&num=${num}'" value="좋아요(${gechu })"></td>
-				<td colspan="4"><input type="button" onclick="location.href='evaluationAction.jsp?gechu=0&bichu=1&num=${num}'" value="싫어요(${bichu })"></td>
+				<td colspan="2"><input type="button" onclick="location.href='evaluationAction.bdo?gechu=1&bichu=0&num=${num}'" value="좋아요(${gechu })"></td>
+				<td colspan="4"><input type="button" onclick="location.href='evaluationAction.bdo?gechu=0&bichu=1&num=${num}'" value="싫어요(${bichu })"></td>
 			</tr>
 			
 		</table>
@@ -117,7 +117,7 @@
 														<form name = "p_search">
 															<a type="button" onclick="nwindow(${num },${list.commentID })">수정</a>
 														</form>	
-														<a onclick="return confirm('정말로 삭제하시겠습니까?')" href = "commentDeleteAction.jsp?num=${num }&commentID=${list.commentID }">삭제</a>
+														<a onclick="return confirm('정말로 삭제하시겠습니까?')" href = "commentDeleteAction.bdo?num=${num }&commentID=${list.commentID }">삭제</a>
 												</c:if>
 										</td>
 										</tr>
@@ -141,7 +141,7 @@
 
 <div align="center">
 	<div>
-		<form method="post" encType = "multipart/form-data" action="commentAction.jsp?num=${num }" name="commentInputForm" onsubmit="return checkText()">
+		<form method="post" encType = "multipart/form-data" action="commentAction.bdo?num=${num }" name="commentInputForm" onsubmit="return checkText()">
 			<table style="text-align: center; border: 1px solid #dddddd">
 				<tr>
 					<td style="border-bottom:none;" valign="middle"><br><br><c:if test="${loginID != null }">${article.writer }(${loginID })</c:if><c:if test="${loginID == null }">^오^</c:if></td>

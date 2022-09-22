@@ -25,7 +25,7 @@
 <div align="center"><b>글 삭제</b>
 <br><br>
 
-	<form action="/MemberProject/board/deletePro.bdo?pageNum=${pageNum }" method="post " name="delForm" onclick="return deleteSave()">
+	<form action="/TestProject2/board/deletePro.bdo?pageNum=${pageNum }" method="post " name="delForm" onsubmit="return deleteSave()">
 	
 		<table width="360" border="1" align="center" cellpadding ="0" cellspacing ="0">
 		
@@ -39,6 +39,8 @@
 				<td align="center">비밀번호:
 					<input type="password" name="pass" size="8" maxlength="12">
 					<input type="hidden" name="num" value="${num }">
+					<input type="hidden" name="pageNum" value="${pageNum }">
+					<input type="hidden" name="imageUID" value="${imageUID }">
 				</td>
 			</tr>
 			
@@ -46,7 +48,7 @@
 				<td align="center" bgcolor="${value_c }">
 					<input type="submit" value="글삭제">
 					<input type="button" value="글목록" 
-					onclick="document.location.href='/MemberProject/board/list.bdo?pageNum=${pageNum}'">
+					onclick="document.location.href='/TestProject2/board/list.bdo?pageNum=${pageNum}'">
 				</td>
 			</tr>
 		</table>

@@ -15,16 +15,6 @@
 <c:set var="loginID" value="${sessionScope.loginID }"/>
 <c:set var="vo" value="${dao.getMember(loginID)}"/>
 
-<%-- 
-int num=0, ref=1, step=0, depth=0;
-try{
-	if(request.getParameter("num")!= null){
-		num = Integer.parseInt(request.getParameter("num"));
-		ref = Integer.parseInt(request.getParameter("ref"));
-		step = Integer.parseInt(request.getParameter("step"));
-		depth = Integer.parseInt(request.getParameter("depth"));
-	}
- --%>
 <body bgcolor="${bodyback_c }">
 
 <div align="center"><b>글 쓰기</b><br><br>
