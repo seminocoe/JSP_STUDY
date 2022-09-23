@@ -18,7 +18,7 @@
 	 	<c:when test="${loginID == null }">
 			 <script type="text/javascript">
 				alert("로그인을 해주세요.");
-				location.href = '../board/mem/login.jsp'
+				location.href = '../board/mem/login.jsp';
 			</script>
 	 	</c:when>
 	 	
@@ -27,7 +27,7 @@
 	 			<c:if test="${num == 0 }">
 	 				<script type="text/javascript">
 			 		alert('유효하지 않은 글입니다.');
-			 		location.href = '../board/mem/login.jsp');
+			 		location.href = '../board/mem/login.jsp';
 			 		</script>
 	 			</c:if>
 	 			
