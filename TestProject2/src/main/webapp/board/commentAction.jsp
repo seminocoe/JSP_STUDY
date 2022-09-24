@@ -34,7 +34,7 @@
 		 		<c:choose>
 	 			<c:when test="${commentID == -1 }">
 	 				<script type="text/javascript">
-			 		alert('평가를 실패했습니다.');
+			 		alert('댓글 작성을 실패했습니다.');
 			 		history.back();
 			 		</script>
 	 			</c:when>

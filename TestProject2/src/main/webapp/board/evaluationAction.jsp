@@ -27,7 +27,7 @@
 	 			<c:if test="${num == 0 }">
 	 				<script type="text/javascript">
 			 		alert('유효하지 않은 글입니다.');
-			 		location.href = '../board/mem/login.jsp';
+			 		location.href = '../board/list.bdo';
 			 		</script>
 	 			</c:if>
 	 			

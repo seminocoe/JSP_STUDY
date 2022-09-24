@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="script.js"></script>
 <meta charset="UTF-8">
 
 <title></title>

@@ -144,7 +144,7 @@
 		<form method="post" encType = "multipart/form-data" action="commentAction.bdo?num=${num }" name="commentInputForm" onsubmit="return checkText()">
 			<table style="text-align: center; border: 1px solid #dddddd">
 				<tr>
-					<td style="border-bottom:none;" valign="middle"><br><br><c:if test="${loginID != null }">${article.writer }(${loginID })</c:if><c:if test="${loginID == null }">^오^</c:if></td>
+					<td style="border-bottom:none;" valign="middle"><br><br><c:if test="${loginID != null }">${vo.name }(${loginID })</c:if><c:if test="${loginID == null }">^오^</c:if></td>
 					<!-- <td><input type="text" style="height:100px;" placeholder="상대방을 존중하는 댓글을 남깁시다." name="commentText"></td> -->
 					<td><textarea style="height:100px;" name="commentText" placeholder="상대방을 존중하는 댓글을 남깁시다."></textarea></td>
 					<td><br><br><input type="submit" value="댓글 작성"></td>

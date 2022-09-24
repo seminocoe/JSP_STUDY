@@ -73,7 +73,7 @@ function send(num,commentID){
 		var sb;
 		var commentText = document.c_commentUpdate.update.value;
 		
-		sb = "commentUpdateActionProc.bdo?num="+num+"&commentID="+commentID+"&commentText="+commentText;
+		sb = "commentUpdatePro.bdo?num="+num+"&commentID="+commentID+"&commentText="+commentText;
 		window.opener.location.href= sb;
 		window.close();
 	}

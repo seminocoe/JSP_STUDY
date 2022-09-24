@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.comment.model.CommentDAO;
 import com.comment.model.CommentVO;
 
-public class CommentUpdateProcAction implements CommandAction {
+public class CommentUpdateProAction implements CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
@@ -14,6 +14,11 @@ public class CommentUpdateProcAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		
 		String pageNum = ("1");
+		
+		String loginID = null;
+		if (request.getSession().getAttribute("loginID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
+			loginID = (String) request.getSession().getAttribute("loginID");//유저아이디에 해당 세션값을 넣어준다.
+		}
 		
 		int commentID = 0;
 		if (request.getParameter("commentID") != null){
@@ -29,7 +34,12 @@ public class CommentUpdateProcAction implements CommandAction {
 		}
 		CommentVO comment = new CommentDAO().getComment(commentID);
 		CommentDAO commentDAO = new CommentDAO();
-		int result = commentDAO.update(commentID, commentText);
+		int result = -1;
+		
+		if(loginID != null && commentText != null){
+			result = commentDAO.update(commentID, commentText);
+			System.out.println(result);
+		}
 		
 		request.setAttribute("num", num);
 		request.setAttribute("pageNum", pageNum);

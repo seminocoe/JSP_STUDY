@@ -11,50 +11,51 @@
 <body>
 		<c:set var="loginID" value="${sessionScope.loginID }"/>
 		
-			<c:if test="${userID == null }">
+			<c:if test="${loginID == null }">
 				<script type="text/javascript">
 				alert('로그인을 하세요.');
 				location.href = '../board/mem/login.jsp';
 				</script>
 			</c:if>
-		<c:if test="${num == 0 }">
-			<script type="text/javascript">
-			alert('유효하지 않은 글 입니다.');
-			location.href = './list.jsp';
-			</script>
-		</c:if>
-	<c:choose>
-		<c:when test="${!userID.equals(comment.getUserID()) }">
-			<script type="text/javascript">
-			alert('권한이 없습니다.');
-			location.href ='./list.jsp';
-			</script>
-		</c:when>
-		<c:otherwise>
-		<c:choose>
-		<c:when test="${comment.getCommentText().equals("") }">
-			<script type="text/javascript">
-				alert('입력이 안된 사항이 있습니다');
+			<c:if test="${num == 0 }">
+				<script type="text/javascript">
+				alert('유효하지 않은 글 입니다.');
+				location.href = './list.bdo';
+				</script>
+			</c:if>
+			
+			<c:choose>
+			<c:when test="${!loginID eq comment.userID }">
+				<script type="text/javascript">
+				alert('권한이 없습니다.');
 				history.back();
-			</script>
-		</c:when>
+				</script>
+			</c:when>
 			<c:otherwise>
 				<c:choose>
-				<c:when test="${result == -1 }">
+				<c:when test="${commentText eq null }">
 					<script type="text/javascript">
-						alert('글수정에 실패했습니다');
+						alert('입력이 안된 사항이 있습니다');
 						history.back();
 					</script>
 				</c:when>
 				<c:otherwise>
-					<script type="text/javascript">
-						location.href= \'content.jsp?num="+num+"&pageNum="+pageNum+"\';
-					</script>
+					<c:choose>
+					<c:when test="${result == -1 }">
+						<script type="text/javascript">
+							alert('글수정에 실패했습니다');
+							history.back();
+						</script>
+					</c:when>
+					<c:otherwise>
+						<script type="text/javascript">
+							location.href= '../board/content.bdo?num='+${num}+'&pageNum='+${pageNum };
+						</script>
+					</c:otherwise>
+					</c:choose>
 				</c:otherwise>
 				</c:choose>
 			</c:otherwise>
-		</c:choose>
-		</c:otherwise>
-	</c:choose>
+			</c:choose>
 </body>
 </html>
