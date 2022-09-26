@@ -1,4 +1,4 @@
-package com.comment.model;
+package com.comment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -106,13 +106,12 @@ public class CommentDAO {
 		return list; //데이터베이스 오류
 	}
 	
-	public int update(int commentID, String commentText, String imageUID) {
-		String SQL = "UPDATE commentDB SET commentText = ?, imageUID = ? WHERE commentID LIKE ?";
+	public int update(int commentID, String commentText) {
+		String SQL = "UPDATE commentDB SET commentText = ? WHERE commentID LIKE ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, commentText);
-			pstmt.setString(2, imageUID);
-			pstmt.setInt(3, commentID);
+			pstmt.setInt(2, commentID);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

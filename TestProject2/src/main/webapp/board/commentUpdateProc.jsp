@@ -49,7 +49,8 @@
 					</c:when>
 					<c:otherwise>
 						<script type="text/javascript">
-							location.href= '../board/content.bdo?num='+${num}+'&pageNum='+${pageNum };
+							window.close();
+							window.opener.location.href= '../board/content.bdo?num='+${num}+'&pageNum='+${pageNum };
 						</script>
 					</c:otherwise>
 					</c:choose>

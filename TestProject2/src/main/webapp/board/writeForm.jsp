@@ -76,7 +76,7 @@
 		</tr>
 		<tr>
 		<td colspan="2" align="center">
-				<input type="file" name="fileName">
+				<input type="file" name="fileName" accept="image/*">
 		</td>
 		</tr>
 		<tr>
